@@ -79,4 +79,12 @@ obj RagEngine {
             print('no new documents to add');
         }
     }
+    can get_from_chroma(query: str,chunck_nos: int=5) {
+        db = Chroma(
+            persist_directory=self.chroma_path,
+            embedding_function=self.get_embedding_function()
+        );
+        results = db.similarity_search_with_score(query,k=chunck_nos);
+        return results;
+    }
 }
